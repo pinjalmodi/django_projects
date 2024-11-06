@@ -1,0 +1,50 @@
+{% extends 'admin-header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<br>
+<br>
+<br>
+<br>
+	<div class="container" align="center">
+                              <h1>Global Notices</h1>
+                              <div class="col-md-6 ct-form" ><br>
+                              {% if msg %}
+                              <b style="color: blue;">{{msg}}</b>
+                              {% endif %}
+                              <form class="gl-notice" action="{% url 'member-notices' %}" method="post" enctype="multipart/form-data" >
+                                {% csrf_token %}
+                                {% if notices %}
+                                    {% for i in notices %}
+                                <div class="form-group" align="left">
+                                      <label for="cf_name">Title</label>
+                                      <input type="text" class="form-control" name="bunglow_no" id="bunglow_no" value="{{i.title}}">
+                                  </div>
+
+                                  <div class="form-group" align="left">
+                                      <label for="cf_message">Notice</label>
+                                      <textarea class="form-control" name="address" id="cf_message" rows="10" cols="30">{{i.notice}}</textarea>
+                                  </div>
+                                  {% endfor %}
+
+                                {% else %}
+
+                                  <tr>
+                                      <td colspan="2">No Notices.</td>
+                                  </tr>
+                                {% endif %}
+
+                                
+  </form>
+ 
+</div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'admin-header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Images</title>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>Upload Images</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="images" multiple required>
+        <button type="submit">Upload Images</button>
+    </form>
+    <a href="{% url 'gallery' %}">View Gallery</a>
+</body>
+</html>
+{% endblock %}

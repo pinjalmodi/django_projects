@@ -1,0 +1,387 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+      rel="icon"
+      href="{% static 'assets/img/kaiadmin/favicon.ico' %}"
+      type="image/x-icon"
+    />
+
+    <!-- Fonts and icons -->
+    <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["{% static 'assets/css/fonts.min.css' %}"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/plugins.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/kaiadmin.min.css' %}" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
+  </head>
+  <body>
+   
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="dark">
+            <a href="/" class="logo">
+              <img
+                src="{% static 'assets/img/kaiadmin/logo_light.svg' %}"
+                alt="navbar brand"
+                class="navbar-brand"
+                height="20"
+              />
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
+            </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+              <li class="nav-item">
+                <a href="{% url 'admin-index' %}">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+                
+              </li>
+              <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                  <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Menu</h4>
+              </li>
+              
+              <li class="nav-item">
+                <a href="{% url 'admin-maintenance' %}">
+                  <i class="fas fa-th-list"></i>
+                  <p>Maintenance</p>
+                  
+                </a>
+                
+              </li>
+              
+              <li class="nav-item">
+                <a href="{% url 'gallery' %}">
+                  <i class="fas fa-table"></i>
+                  <p>Gallery</p>
+                  
+                </a>
+                
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'admin-member-information-view' %}">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <p>Member Information</p>
+                  
+                </a>
+                
+              </li>
+              
+              <li class="nav-item">
+                <a href="{% url 'DiscussionList' %}">
+                  <i class="fas fa-desktop"></i>
+                  <p>Discussions & Solutions</p>
+                  
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'member-notices' %}">
+                  <i class="fas fa-file"></i>
+                  <p>Global Notice</p>
+                  
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'create-order' %}">
+                  <i class="fas fa-bars"></i>
+                  <p>Payment</p>
+                  
+                </a>
+                    </li>
+                    
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="main-header">
+          <div class="main-header-logo">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="dark">
+              <a href="index.html" class="logo">
+                <img
+                  src="{% static 'assets/img/kaiadmin/logo_light.svg' %}"
+                  alt="navbar brand"
+                  class="navbar-brand"
+                  height="20"
+                />
+              </a>
+              <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                  <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                  <i class="gg-menu-left"></i>
+                </button>
+              </div>
+              <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+              </button>
+            </div>
+            <!-- End Logo Header -->
+          </div>
+          <!-- Navbar Header -->
+          <nav
+            class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
+          >
+            <div class="container-fluid">
+              
+
+              <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                <li
+                  class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
+                >
+                  
+                </li>
+                <li class="nav-item topbar-icon dropdown hidden-caret">
+                  
+                  <ul
+                    class="dropdown-menu messages-notif-box animated fadeIn"
+                    aria-labelledby="messageDropdown"
+                  >
+                    
+                    
+                    <li>
+                      <a class="see-all" href="javascript:void(0);"
+                        >See all messages<i class="fa fa-angle-right"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item topbar-icon dropdown hidden-caret">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="notifDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    
+                    
+                  </a>
+                  <ul
+                    class="dropdown-menu notif-box animated fadeIn"
+                    aria-labelledby="notifDropdown"
+                  >
+                    
+                    <li>
+                      <div class="notif-scroll scrollbar-outer">
+                        <div class="notif-center">
+                          
+                          
+                          
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a class="see-all" href="javascript:void(0);"
+                        >See all notifications<i class="fa fa-angle-right"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                
+                {% if request.session.email %}
+                <li class="nav-item topbar-user dropdown hidden-caret">
+                  <a
+                    class="dropdown-toggle profile-pic"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    aria-expanded="false"
+                  >
+                    <div class="avatar-sm">
+                      <img
+                        src="{{request.session.profile_picture}}" style="width: 50px; height: 50px; border-radius: 50%;"
+                              alt="image profile"
+                        alt="..."
+                        class="avatar-img rounded-circle"
+                      />
+                    </div>
+                    <span class="profile-username">
+                      <span class="op-7">Hi,</span>
+                      <span class="fw-bold">{{request.session.fname}}</span>
+                    </span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user animated fadeIn">
+                    <div class="dropdown-user-scroll scrollbar-outer">
+                      <li>
+                        <div class="user-box">
+                          <div class="avatar-lg">
+                            
+                            
+                          </div>
+                          <div class="u-text">
+                            <h4>{{request.session.fname}}</h4>
+                            <p class="text-muted">{{request.session.email}}</p>
+                            <a
+                              href="{% url 'admin-profile' %}"
+                              class="btn btn-xs btn-secondary btn-sm"
+                              >View Profile</a
+                            >
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown-divider"></div>
+                    
+                        <a class="dropdown-item" href="{% url 'admin-profile' %}">My Profile</a>
+
+                        <a class="dropdown-item" href="{% url 'admin-change-password' %}">Change Password</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'make-requests' %}">Approve Requests</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'admin-member-information' %}">Add Members</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'notices' %}">Add Notice</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'admin-maintenance' %}">Admin Maintenance</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'add-maintenance' %}">Add Maintenance</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'create_gallery' %}">Add Gallery</a>
+                        <div class="dropdown-divider"></div>
+                        
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                {% endif %}
+                      </li>
+                    </div>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <!-- End Navbar -->
+        </div>
+
+        
+        {% block content %}
+        {% endblock %}
+
+
+        
+      </div>
+
+      <!-- Custom template | don't include it in your project! -->
+      
+      <!-- End Custom template -->
+    </div>
+    
+   
+    <script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+
+    <!-- Chart JS -->
+    <script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
+
+    <!-- Chart Circle -->
+    <script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
+
+    <!-- Datatables -->
+    <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
+
+    <!-- Sweet Alert -->
+    <script src="{% static 'assets/js/plugin/sweetalert/sweetalert.min.js' %}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="{% static 'assets/js/setting-demo.js' %}"></script>
+    <script src="{% static 'assets/js/demo.js' %}"></script>
+    <script>
+      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#177dff",
+        fillColor: "rgba(23, 125, 255, 0.14)",
+      });
+
+      $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#f3545d",
+        fillColor: "rgba(243, 84, 93, .14)",
+      });
+
+      $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#ffa534",
+        fillColor: "rgba(255, 165, 52, .14)",
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{% extends 'member-header.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Payment Form</title>
+</head>
+<body>
+	<form method="POST" action="{% url 'payment_all' %}">
+		{% csrf_token %}
+	
+			{% for j in orders %}
+				<div>
+					<label for="order_{{ j.id }}">Order ID: {{ j.id }}</label>
+					<input type="text" id="order_{{ j.id }}" name="order_{{ j.id }}" value="{{ j.status }}" readonly>
+					<div class="{{ j.amount }}">Amount: {{ j.amount }}</div>
+				</div>
+			{% endfor %}
+			
+		
+	</form>
+</body>
+</html>
+{% endblock %}

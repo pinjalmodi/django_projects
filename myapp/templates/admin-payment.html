@@ -1,0 +1,74 @@
+{% extends 'admin-header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<br>
+<body>
+    <h1>Complete Your Payment</h1>
+    <form id="payment-form" method="POST" action="{% url 'payment' %}">
+        {% csrf_token %}
+        <input type="hidden" name="amount" value="{{ amount }}">
+        <input type="hidden" name="order_id" value="{{ order_id }}">
+    </form>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var options = {
+            "key": "{{ RAZORPAY_API_KEY }}",
+            "amount": "{{ amount }}", // Amount in paise
+            "currency": "INR",
+            "name": "Your Company Name",
+            "description": "Payment for Order",
+            "image": "https://your-logo-url.com",
+            "order_id": "{{ order_id }}", // Ensure this is set correctly
+            "handler": function (response) {
+                console.log(response);
+                
+                fetch("{% url 'payment' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({
+                        order_id: response.razorpay_order_id,
+                        payment_id: response.razorpay_payment_id,
+                        amount: response.razorpay_amount // Ensure this is correct
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = "/payment-success/";
+                    } else {
+                        alert(data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Payment processing failed. Please try again.');
+                });
+            },
+            "prefill": {
+                "name": "Customer Name",
+                "email": "customer@example.com",
+                "contact": "1234567890"
+            },
+            "theme": {
+                "color": "#F37254"
+            }
+        };
+
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    });
+</script>
+</body>
+</html>
+{% endblock %}

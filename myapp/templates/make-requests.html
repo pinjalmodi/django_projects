@@ -1,0 +1,46 @@
+{% extends 'admin-header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registration</title>
+</head>
+<body>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+    <h1>Pending User Requests</h1>
+    <table>
+        {% if pending_users %}
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in pending_users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <a href="{% url 'approve_user' user.id %}" class="button approve">Approve</a>
+                <a href="{% url 'decline_user' user.id %}" class="button decline">Decline</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td>
+            No Pending Requests</td>
+        </tr>
+        {% endif %}
+    </table>
+</body>
+</table>
+{% endblock %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Default Title{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Site Header</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'comm-insert' discussion.id %}">Insert Comment</a></li>
+                <li><a href="{% url 'disc-insert' %}">Insert Discussion</a></li>
+                <h3>Comments:</h3>
+                {% if comments %}
+                    {% for comment in comments %}
+                        <div>
+                            <p>{{ comment.text }}</p>
+                            <a href="{% url 'rem-comm' discussion_id=discussion.id comment_id=comment.id %}">Remove Comment</a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No comments yet.</p>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        <!-- Default content can go here -->
+        {% endblock %}
+    </main>
+    
+    <footer>
+        <p>Footer content here</p>
+    </footer>
+</body>
+</html>

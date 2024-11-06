@@ -1,0 +1,382 @@
+{% extends 'member-header.html' %}
+
+{% block content%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Frame</title>
+    <style> 
+
+     .container1 {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    height: 100vh;           /* Full viewport height */
+    background-color: #f0f0f0; /* Optional: background color */
+}
+
+/* Photo frame styling */
+.photo-frame {
+    width: 600px;            /* Width of the photo frame */
+    height: 400px;           /* Height of the photo frame */
+    border: 10px solid #000; /* Border around the frame */
+    display: flex;
+    flex-direction: column;  /* Stack heading and image vertically */
+    align-items: center;     /* Center content horizontally */
+    background-color: #fff;  /* Background color of the frame */
+    padding: 10px;           /* Padding inside the frame */
+    box-sizing: border-box;   /* Include border and padding in the element's total width and height */
+   
+}
+
+.photo-frame h3 {
+    margin: 0;
+    padding: 10px 0; /* Optional: space around heading */
+    background-color: #fff; /* Background color for the heading (optional) */
+}
+
+.photo-frame img {
+    max-width: 100%; /* Ensure the image fits within the frame */
+    max-height: calc(100% - 40px); /* Adjust height to fit within the remaining space after heading */
+    display: block; /* Remove any default inline spacing */
+} 
+    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+      rel="icon"
+      href="{% static 'assets/img/kaiadmin/favicon.ico' %}"
+      type="image/x-icon"
+    />
+
+    <!-- Fonts and icons -->
+    <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["{% static 'assets/css/fonts.min.css' %}"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/plugins.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/kaiadmin.min.css' %}" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
+  </head>
+  <body>
+          
+
+      
+        
+          
+          
+        
+
+        <div class="container">
+          <div class="page-inner">
+            <div
+              class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
+            >
+              <div>
+                <h3 class="fw-bold mb-3">Dashboard</h3>
+                <h6 class="op-7 mb-2">Free Bootstrap 5 Admin Dashboard</h6>
+              </div>
+              <div class="ms-md-auto py-2 py-md-0">
+                {% if request.session.email %}
+                <a href="{% url 'logout' %}" class="btn btn-label-info btn-round me-2">Logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-label-info btn-round me-2">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-primary btn-round">Register</a>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div
+                          class="icon-big text-center icon-primary bubble-shadow-small"
+                        >
+                          <i class="fas fa-users"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                          <h4 class="card-category"><b><a href="{% url 'gallery' %}">Gallery</a></b></h4>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div
+                          class="icon-big text-center icon-info bubble-shadow-small"
+                        >
+                          <i class="fas fa-user-check"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                          <h4 class="card-category"><a href="{% url 'admin-member-information-view' %}">Members</a></h4>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div
+                          class="icon-big text-center icon-success bubble-shadow-small"
+                        >
+                          <i class="fas fa-luggage-cart"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                          <h4 class="card-category"><a href="{% url 'admin-maintenance' %}">Maintenance</a></h4>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div
+                          class="icon-big text-center icon-secondary bubble-shadow-small"
+                        >
+                          <i class="far fa-check-circle"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                          <h4 class="card-category"><a href="{% url 'create-order' %}">Payment</a></h4>
+                  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card card-round">
+                  <div class="card-body">
+                    <div class="card-head-row card-tools-still-right">
+                      <div class="card-title">New Members</div>
+                        {% for i in reg_users %}                    
+                        <div class="card-tools">
+                        
+                        <div class="dropdown">
+                          
+                          <div
+                            class="dropdown-menu"
+                            aria-labelledby="dropdownMenuButton"
+                          >
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                        
+                          <div class="card-list py-4">
+                            <div class="item-list">
+                              <div class="avatar">
+                                <img
+                                  src="{% static 'assets/img/jm_denis.jpg' %}"
+                                  alt="User Avatar"
+                                  class="avatar-img rounded-circle"
+                                />
+                              </div>
+                              
+                              <div class="info-user ms-3">
+                                <div class="name">Name: {{i.fname}} </div>
+                                
+                              <div class="status">Flat No: {{ i.bunglow_no }}</div>
+                                
+                                
+                             </div>
+                            </div>
+                          
+                      
+                        {% endfor %}
+                        </div>
+                      </div>
+                   </div>
+              </div>
+              <div class="col-md-8">
+  <div class="card card-round">
+    <div class="card-header">
+      <div class="card-head-row card-tools-still-right">
+        <div class="card-title">Maintenance Paid</div>
+        <div class="card-tools">
+          <div class="dropdown">
+            <!-- Dropdown button for options related to payments -->
+            <button
+              class="btn btn-icon btn-clean me-0"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fas fa-ellipsis-h"></i>
+            </button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <!-- Projects table -->
+        <form method="POST" action="{% url 'payment_all' %}">
+  {% csrf_token %}
+  <table class="table align-items-center mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Payment Number</th>
+        <th scope="col" class="text-end">Date & Time</th>
+        <th scope="col" class="text-end">Amount</th>
+        <th scope="col" class="text-end">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for k in orders %}
+        <tr>
+          <th scope="row">
+            <button class="btn btn-icon btn-round btn-success btn-sm me-2" type="submit" name="order_id" value="{{ k.id }}">
+              <i class="fa fa-check"></i>
+            </button>
+            {{ k.id }}
+          </th>
+          <td class="text-end">{{ k.created_at }}</td>
+          <td class="text-end">{{ k.amount }}</td>
+          <td class="text-end">
+            <span class="badge badge-success">{{ k.status }}</span>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+          
+
+    
+      
+
+      
+    <!--   Core JS Files   -->
+    <script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+
+    <!-- Chart JS -->
+    <script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
+
+
+    <!-- jQuery Sparkline -->
+    <script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
+
+    <!-- Chart Circle -->
+    <script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
+
+    <!-- Datatables -->
+    <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
+
+    <!-- Sweet Alert -->
+    <script src="{% static 'assets/js/plugin/sweetalert/sweetalert.min.js' %}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="{% static 'assets/js/setting-demo.js' %}"></script>
+    <script src="{% static 'assets/js/demo.js' %}"></script>
+
+    <script>
+      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#177dff",
+        fillColor: "rgba(23, 125, 255, 0.14)",
+      });
+
+      $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#f3545d",
+        fillColor: "rgba(243, 84, 93, .14)",
+      });
+
+      $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#ffa534",
+        fillColor: "rgba(255, 165, 52, .14)",
+      });
+    </script>
+  </body>
+</html>
+{% endblock %}

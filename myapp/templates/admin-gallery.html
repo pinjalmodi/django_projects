@@ -1,0 +1,37 @@
+{% extends 'admin-header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .gallery img {
+            width: calc(33.33% - 10px);
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <h2>Image Gallery</h2>
+    <div class="gallery">
+        {% for image in images %}
+            <img src="{{ image.image.url }}" alt="Image">
+        {% endfor %}
+    </div>
+    
+</body>
+</html>
+{% endblock %}

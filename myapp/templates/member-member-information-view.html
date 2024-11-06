@@ -1,0 +1,105 @@
+{% extends 'member-header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		
+	body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Main wrapper to center content */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            padding: 20px; /* Optional: add padding */
+            box-sizing: border-box; /* Include padding in height/width calculations */
+
+        }
+
+        /* Container for the content */
+        container1 {
+            width: 100%; /* Full width of the wrapper */
+            max-width: 800px; /* Maximum width for the content */
+            box-sizing: border-box; /* Include padding in width calculations */
+        
+        }
+
+        /* Table styling */
+        table {
+            width: 100%; /* Make table fit container width */
+            border-collapse: collapse; /* Remove space between borders */
+            margin: 0 auto; /* Center table horizontally */
+        }
+
+        th, td {
+            padding: 8px; /* Add padding for readability */
+            text-align: left; /* Align text to the left */
+            border: 1px solid black; /* Add border to cells */
+        }
+
+        th {
+            background-color: #f2f2f2; 
+            text-align: center; /* Center-align text in header */
+        }
+	</style>
+</head>
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<div class="container1">
+
+<form class="admin-member-information-view" action="{% url 'admin-member-information-view' %}" method="post" enctype="multipart/form-data" >
+{% csrf_token %}
+ <table border="2" style="margin-left: auto; margin-right: auto;">
+    <thead>
+        <tr><th>bunglow_no</th>
+        	<th>Fname</th>
+        	<th>Lname</th>
+        	<th>Mobile</th>
+            <th>Email</th>
+            <th>Address</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+    	{% if users %}
+        	{% for i in users %}
+
+        <tr>
+        	<td>{{i.bunglow_no}}</td>
+        	<td>{{i.fname}}</td>
+        	<td>{{i.lname}}</td>
+        	<td>{{i.mobile}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.address}}</td>   
+        </tr>
+        	{% endfor %}
+
+        {% else %}
+
+        <tr>
+            <td colspan="6">No Members.</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+</form>
+                  </div>
+</body>
+</html>
+{% endblock %}

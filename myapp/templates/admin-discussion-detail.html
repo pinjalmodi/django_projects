@@ -1,0 +1,44 @@
+
+{% extends 'admin-header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{{ discussion.title }}</title>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+    <h1>{{ discussion.title }}</h1>
+    <p>{{ discussion.content }}</p>
+    <p>Posted by: {{ discussion.author }} on {{ discussion.created_at }}</p>
+    
+    <h3>Comments:</h3>
+    {% for comment in comments %}
+        <p>{{ comment.content }} - {{ comment.author }}</p>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
+
+    <form method="post" action="{% url 'discussion-detail' discussion_id %}">
+    {% csrf_token %}
+    <label for="content">Comment:</label>
+    <textarea id="content" name="content"></textarea>
+    <br>
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author">
+    <br>
+    <button type="submit">Create Comment</button>
+</form>
+    <a href="{% url 'DiscussionList' %}">Back to Discussions</a>
+</body>
+</html>
+{% endblock %}

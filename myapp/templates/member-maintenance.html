@@ -1,0 +1,41 @@
+{% extends 'member-header.html' %}
+
+{% block content %}
+{% load static %}
+<br>
+<br>
+<br>
+<br>
+    
+    <form method="POST" action="{% url 'admin-maintenance' %}">
+        {% csrf_token %}
+        <div class="container">
+            <h2>Maintenance Due Report{{current_date}}</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Flat Number</th>
+                        <th>Name</th>
+                        <th>Due Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% if users %}
+                        {% for i in users %}
+                            <tr>
+                                <td>{{i.bunglow_no}}</td>
+                                <td>{{i.fname}}</td>
+                                <td>{{i.due_amount}}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="3">No members found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+{% endblock %}

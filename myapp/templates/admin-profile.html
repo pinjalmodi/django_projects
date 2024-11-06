@@ -1,0 +1,116 @@
+{% extends 'admin-header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/x-icon" href="{% static 'assetsg/favicon.ico' %}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{%static 'css/styles.css' %}" rel="stylesheet" />
+
+
+  </head>
+  <body>
+
+
+      <div id="wrapper" class="homepage-1"> <!-- wrapper -->
+          
+          
+          <div id="content"> <!-- Content -->
+              <div class="page-title">
+                  <div class="container">
+                      <div class="page-title-inner">
+                          
+                          <div class="breadcumb"> <a href="{% url 'admin-index' %}">Home</a><span> / </span><span>Register</span></div>
+                          <div class="clearfix"></div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="about-page">
+                  <div class="container">
+                      <div class="row">
+                          
+                          
+                          <div class="col-md-6 ct-form">
+                            <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                              <h1>Profile</h1>
+                              {% if msg %}
+                              <b style="color: blue;">{{msg}}</b>
+                              {% endif %}
+                              <form class="contact-form" action="{% url 'profile' %}" method="post" enctype="multipart/form-data" >
+                                {% csrf_token %}
+
+
+
+
+                                  <div class="form-group">
+                                      <label for="cf_name"><h4>Flat Number</h4></label>
+                                      <input type="text" class="form-control" name="bunglow_no" id="bunglow_no" value="{{user.bunglow_no}}">
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="cf_name"><h4>Your First Name</h4></label>
+                                      <input type="text" class="form-control" name="f_name" id="cf_name" value="{{user.fname}}">
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="cf_name"><h4>Your Last Name</h4></label>
+                                      <input type="text" class="form-control" name="l_name" id="cl_name" value="{{user.lname}}">
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="cf_email"><h4>Your E-mail</h4></label>
+                                      <input type="email" class="form-control" name="email" id="cf_email" value="{{user.email}}" readonly>
+                                  <span id="email_error"></span>
+                                  </div>
+                                  
+
+                                  <div class="form-group">
+                                      <label for="cf_mobile"><h4>Mobile</h4></label>
+                                      <input type="tel" class="form-control" name="mobile" id="mobile" value="{{user.mobile}}">
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="cf_message"><h4>Address</h4></label>
+                                      <textarea class="form-control" name="address" id="cf_message" placeholder="Address">{{user.address}}</textarea>
+                                  </div>
+
+                                   <div class="form-group">
+                                    <img src="{{user.profile_picture.url}}" style="width: 100px; height: 100px; border-radius: 50%;">
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="cf_subject"><h4>Profile Picture</h4></label>
+                                      <input type="file" class="form-control" name="profile_picture" id="cf_subject">
+                                  </div>
+                                  <br>
+                                  <br>
+
+
+
+                                  <button type="submit" class="btn btn-primary">Update Profile</button>
+                              </form>
+                          </div>
+                      </div>
+                      
+                     
+                  </div>
+              </div>
+
+          </div> <!-- Content -->
+          
+      </div> <!-- wrapper -->
+      
+  </body>
+</html>
+{% endblock %}
